@@ -8,7 +8,7 @@ const Header = () => {
         <h2 className="font-bold text-2xl max-sm:hidden">Movie Day</h2>
       </Link>
       <Link
-        to="/"
+        to="/create"
         className="border rounded-full py-1 px-5 hover:bg-black hover:text-white transition"
       >
         Film Oluştur

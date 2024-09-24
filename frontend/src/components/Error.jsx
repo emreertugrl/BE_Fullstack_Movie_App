@@ -2,7 +2,7 @@ import React from "react";
 
 const Error = ({ info, refetch }) => {
   return (
-    <div className="my-10 px-10 text-center bg-red-500 p-5 rounded-md max-w-[500px] mx-auto text-white">
+    <div className="my-10 px-20 text-center bg-red-500  p-5 rounded-md max-w-[500px] mx-auto text-white">
       <h1>Üzgünüz bir sorun oluştu :(</h1>
       <h1>{info}</h1>
 

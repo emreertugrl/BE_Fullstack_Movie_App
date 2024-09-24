@@ -3,6 +3,7 @@ const getRequest = require("./methods/get");
 const postRequest = require("./methods/post");
 const deleteRequest = require("./methods/delete");
 const defaultRequest = require("./methods/default");
+const optionsRequest = require("./methods/options");
 
 // 1) server oluştur
 
@@ -20,6 +21,8 @@ const server = http.createServer((req, res) => {
       return postRequest(req, res);
     case "DELETE":
       return deleteRequest(req, res);
+    case "OPTIONS":
+      return optionsRequest(req, res);
     default:
       return defaultRequest(req, res);
   }
