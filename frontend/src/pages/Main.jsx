@@ -4,15 +4,26 @@ import Loader from "./../components/Loader";
 import Error from "../components/Error";
 import Card from "./../components/Card";
 import Hero from "../components/Hero";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const Main = () => {
+  const [params, setParams] = useSearchParams();
+  const { query } = useParams();
+  console.log(query);
+  const options = {
+    params: {
+      query: params.get("query"),
+    },
+  };
   //
   // sayfaya girildiğinde filmleri almak için api isteği at
   const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ["movies"],
-    queryFn: () => api.get("/api/movies").then((res) => res.data.movies),
+    queryKey: ["movies", options],
+    queryFn: () =>
+      api.get("/api/movies", options).then((res) => {
+        return res.data.movies;
+      }),
   });
-  console.log(data);
 
   return (
     <div className="">

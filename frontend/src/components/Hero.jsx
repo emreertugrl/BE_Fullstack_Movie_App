@@ -1,14 +1,28 @@
-import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 const Hero = () => {
+  const [params, setParams] = useSearchParams();
+  // form gönderilince
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // search inputunu al ve sayfaya yönlendir
+    const text = e.target[0].value;
+    // url'e parametre ekle
+    setParams({ query: text });
+  };
+
   return (
     <div className=" text-white  px-10 py-20 lg:px-20 bg-[linear-gradient(#00000070,#00000070),url('wick.jpg')] bg-center bg-cover">
       <h1 className="text-4xl md:text-5xl">Hoşgeldin.</h1>
       <h2 className="text-xl sm:text-2xl md:text-3xl">
         Milyonlarca Film, Dizi ve Aktörleri Keşfet
       </h2>
-      <div className="rounded-lg overflow-hidden flex mt-5">
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-lg overflow-hidden flex mt-5"
+      >
         <input
+          defaultValue={params.get("query")}
           className="w-full py-2 px-4 text-black"
           type="text"
           placeholder="Film, Dizi, Aktör arayın..."
@@ -16,7 +30,7 @@ const Hero = () => {
         <button className="bg-blue-500 px-5 font-semibold hover:bg-blue-600">
           Ara
         </button>
-      </div>
+      </form>
     </div>
   );
 };
