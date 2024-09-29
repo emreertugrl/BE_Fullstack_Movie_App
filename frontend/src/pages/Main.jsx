@@ -4,12 +4,11 @@ import Loader from "./../components/Loader";
 import Error from "../components/Error";
 import Card from "./../components/Card";
 import Hero from "../components/Hero";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const Main = () => {
   const [params, setParams] = useSearchParams();
-  const { query } = useParams();
-  console.log(query);
+
   const options = {
     params: {
       query: params.get("query"),
@@ -21,7 +20,8 @@ const Main = () => {
     queryKey: ["movies", options],
     queryFn: () =>
       api.get("/api/movies", options).then((res) => {
-        return res.data.movies;
+        console.log(res.data[0]);
+        return res.data;
       }),
   });
 

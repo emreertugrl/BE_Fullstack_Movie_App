@@ -15,7 +15,7 @@ const getRequest = (req, res) => {
     //1- json dosyasından filmleri al
     const data = JSON.parse(fs.readFileSync("./data/movies.json", "utf-8"));
     //2- urldeki idye karşılık gelen elemanı dizide ara
-    const movie = data.movies.find((i) => i.id === id);
+    const movie = data.find((i) => i.id === id);
     //3- eğerki film bulunursa client'a gönder
     if (movie) {
       return res.end(JSON.stringify(movie));
@@ -38,10 +38,10 @@ const getRequest = (req, res) => {
     // 1-)durum kodu belirle bu 200 olduğıu için yazmamıza gerek yok ama diğer durumlarda belirtilmelidir.
 
     // 2-)json dosyasından filmleri al
-    const data = JSON.parse(fs.readFileSync("./data/movies.json", "utf-8"));
+    const movies = JSON.parse(fs.readFileSync("./data/movies.json", "utf-8"));
     if (param && param !== "/api/movies") {
       // eğer parametre varsa filtrelenmiş cevabı gönder
-      const filteredMovies = data.movies.filter((movie) =>
+      const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(param)
       );
       return res.end(JSON.stringify(filteredMovies));
@@ -49,7 +49,7 @@ const getRequest = (req, res) => {
     // eğer parametre yoksa bütün filmleri gönder
 
     // 3-)clienta cevap gönder
-    return res.end(JSON.stringify(data));
+    return res.end(JSON.stringify(movies));
   }
 
   // 3-path kısmı ile gelen istek eşleşmezse ekrana yazar.yol yanlışsa hata gönder

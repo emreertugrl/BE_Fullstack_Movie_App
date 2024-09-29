@@ -2,22 +2,22 @@ const bodyParser = require("./utils/bodyParser");
 const crypto = require("crypto");
 const fs = require("fs");
 
+// gelen veriyi kontrol et
+const keys = [
+  "title",
+  "year",
+  "rating",
+  "description",
+  "language",
+  "director",
+  "duration",
+];
+
 const postRequest = async (req, res) => {
   if (req.url === "/api/movies") {
     // isteğin body kısmına erişme
     const body = await bodyParser(req);
-    console.log(body);
 
-    // gelen veriyi kontrol et
-    const keys = [
-      "title",
-      "year",
-      "rating",
-      "description",
-      "language",
-      "director",
-      "duration",
-    ];
     if (
       keys.some((key) => !body[key]) ||
       !body.genre.length > 0 ||
@@ -34,7 +34,7 @@ const postRequest = async (req, res) => {
     let data = fs.readFileSync("./data/movies.json", "utf-8");
     data = JSON.parse(data);
     // mevcut filmlerin üzerine yeni film ekle
-    data.movies.push(body);
+    data.push(body);
 
     // json dosyasını güncelle
     fs.writeFileSync("./data/movies.json", JSON.stringify(data));
